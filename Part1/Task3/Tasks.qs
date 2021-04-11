@@ -25,6 +25,23 @@ namespace QCHack.Task3 {
     // on your solution to check that it passes before you submit the solution!
     operation Task3_ValidTriangle (inputs : Qubit[], output : Qubit) : Unit is Adj+Ctl {
         // ...
+        //Increment:
+        CNOT(inputs[0],inputs[2]);
+        CNOT(inputs[0],inputs[1]);
+        CNOT(inputs[1],inputs[2]);
+        //Negate output
+        X(output);
+        //Negate 2 most significative qubits
+        X(inputs[1]);
+        X(inputs[2]);
+        //Check 2 most significative qubits
+        CCNOT(inputs[1],inputs[2],output);
+        //Uncompute
+        X(inputs[1]);
+        X(inputs[2]);
+        CNOT(inputs[1],inputs[2]);
+        CNOT(inputs[0],inputs[1]);
+        CNOT(inputs[0],inputs[2]);
     }
 }
 
